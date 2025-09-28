@@ -1,11 +1,14 @@
 *** Keywords ***
 Launch app
-    [Arguments]    ${PLATFORM_NAME}    ${PLATFORM_VERSION}    ${APP_PATH}
-    Open Application    ${PLATFORM_NAME}    ${PLATFORM_VERSION}    ${APP_PATH}
+    [Arguments]    ${PLATFORM_NAME}    ${PLATFORM_NAME}    ${APK_PATH}    ${AUTOMATION_NAME}
+    Open Application    http://localhost:4723
+    ...    platformName=${PLATFORM_NAME}
+    ...    deviceName=${PLATFORM_NAME}
+    ...    app=${APK_PATH}
+    ...    automationName=${AUTOMATION_NAME}
 
 Add Todo
     [Arguments]    ${todo_text}
-    command / step to tap add / new todo
     Wait Until Element Is Visible    id=new_todo_button    timeout=10s
     Click Element    id=new_todo_button
     Input Text       id=todo_input_field    ${todo_text}
@@ -13,9 +16,5 @@ Add Todo
 
 Todo Should Exist
     [Arguments]    ${todo_text}
-    # ค้นหา element ที่มีข้อความ todo_text
     Wait Until Element Is Visible    xpath=//android.widget.TextView[@text="${todo_text}"]    timeout=5s
     Element Should Contain    xpath=//android.widget.TextView[@text="${todo_text}"]    ${todo_text}
-
-Close Application
-    Close Application

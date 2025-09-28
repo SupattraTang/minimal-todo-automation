@@ -2,13 +2,13 @@ Pipeline scriptpipeline {
     agent any
 
     environment {
-        ROBOT_OPTIONS = "-d results tests/test_todo_suite.robot"
+        ROBOT_OPTIONS = "-d results tests/add_todo.robot"
     }
 
     stages {
         stage('Checkout Code From Git') {
             steps {
-                git url: 'https://github.com/avjinder/Minimal-Todo.git', branch: 'main'
+                git url: 'https://github.com/SupattraTang/minimal-todo-automation.git', branch: 'main'
 
             }
         }
